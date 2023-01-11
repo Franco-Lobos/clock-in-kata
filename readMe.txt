@@ -12,3 +12,8 @@ Test packages management installed:
    babel-preset-es2015 
    babel-preset-stage-0
    babel-register  
+
+
+
+MyLibrary:
+    Contains functions for testing
