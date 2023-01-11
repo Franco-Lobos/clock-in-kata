@@ -2,7 +2,7 @@ const express = require('express');
 
 //INIT 
 const app = express();
-require('./database');
+// require('./database');
 
 
 //Routes
