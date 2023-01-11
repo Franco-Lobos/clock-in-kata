@@ -1,8 +1,9 @@
 import assert from 'assert';
-import { getTimeTrack } from './library/myLibrary';
+import "babel-polyfill";
 
 const gpsIsAvailable = new Promise((resolve, reject) => {
-  resolve(availableGpsCoordinates);
+  resolve();
+  // resolve(availableGpsCoordinates);
 });
 
 const gpsIsNotAvailable = new Promise((resolve, reject) => {
@@ -10,21 +11,31 @@ const gpsIsNotAvailable = new Promise((resolve, reject) => {
 });
 
 
-//Time-tracking
-function sendClockIn(gpsIsAvailable) {
+function sendClockIn(date, gps = false) {
+  let dateRes = new Date().toISOString();
   return new Promise((resolve, reject)=>{
-    resolve();
+    if(dateRes){
+      setTimeout(() => {
+        return resolve(dateRes);
+     }, 1000);
+    }
+    else{
+      reject("Error, date could not be loaded");
+    }
   });
-  //return timeTracking
 }
 
-
+//Time-tracking
 describe('time tracking', () => {
   context('No GPS - simple clock-in', ()=>{
-    it('XHttp testing', ()=>{
-      // assert(sendClockIn());
-    })
-  })
+    it('XHttp testing', async ()=>{
+      let date = new Date().toISOString();
+      let dateResponse = await sendClockIn(date);
+      let comproveDate = new Date(dateResponse);
+      let flag = comproveDate.getTime() ? 1 :0;
+      assert(flag === 1);
+      });
+  });
 
   // context('GPS is required', () => {
   //   it('sends clock-in when GPS is available', () =>
